@@ -1,0 +1,19 @@
+<div *ngIf="article" class="media">  
+    <div class="media-left">
+        <a *ngIf="article.banner" [routerLink]= "['/articles', article.url]">
+            <img class="media-object" style="width:150px;" alt="" [src]="article.banner">
+        </a> 
+    </div>
+    <div class="media-body info">
+        <h3 class="media-heading"><a [routerLink]= "['/articles', article.categories[0], article.url]">{{ article.title }}</a></h3>
+        <span *ngFor="let cat of article.categories">
+            <a [routerLink]="['/', cat]"><i class="label label-default">{{ cat }}</i></a>
+        </span>
+        <br/><br/>
+        <span>
+            by {{ article.author }}
+        </span> |  
+        <span class="glyphicon glyphicon-time"></span> Posted on {{article.publishDate | date: 'shortDate'}}
+    </div>
+    
+</div>

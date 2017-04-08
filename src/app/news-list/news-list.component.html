@@ -1,0 +1,23 @@
+
+  <h1>News Articles</h1>
+  <hr/>
+  <div class="row">
+    <div class="col-md-8">
+      <div *ngIf="hasMessages()" class="alert alert-info">
+        <span *ngFor="let message of messages">{{message}} <br/></span>
+      </div>
+
+      <div *ngIf="hasArticles()">
+        <ngb-pagination [collectionSize]="articles.length" [(page)]="page" 
+          [(pageSize)]="pagesize" (pageChange)="changePage()"></ngb-pagination>
+        <span *ngFor="let article of pagedArticles">
+          <news-listitem [article]="article"></news-listitem>
+          <hr/>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <app-side-menu [links]="links"></app-side-menu>
+    </div>
+  </div>
+

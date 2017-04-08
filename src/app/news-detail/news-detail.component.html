@@ -1,0 +1,25 @@
+  <div>
+      <div class="col-md-8">
+        <h2>
+            {{article.title}}
+        </h2>             
+        <span>
+          <img *ngIf="article.banner" class="img-responsive" [src]="article?.banner" alt="">
+        </span>
+        <span class="pull-left">
+              by {{article.author}} 
+            <span class="glyphicon glyphicon-time"></span> 
+            Posted on {{article.publishDate | date: 'shortDate'}}
+        </span>
+        <br/><br/>
+        <span *ngFor="let cat of article.categories">
+          <a [routerLink]="['/', cat]"><i class="label label-default">{{ cat }}</i></a>
+        </span>
+        <hr>
+        <p [innerHtml]="article.content | MarkdownToHtml"></p>   
+        <br/><br/>
+      </div>
+      <div class="col-md-4">
+        <app-side-menu [links]="links"></app-side-menu>
+    </div>
+  </div>  
