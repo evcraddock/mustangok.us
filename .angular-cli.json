@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.32.3",
     "name": "sample-news"
   },
   "apps": [
@@ -52,7 +51,10 @@
     }
   },
   "defaults": {
-    "styleExt": "less",
-    "component": {}
+      "styleExt": "less",
+      "component": {
+      "inlineTemplate": false,
+      "spec": true
+    }
   }
 }
