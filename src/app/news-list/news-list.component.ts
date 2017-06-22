@@ -19,8 +19,6 @@ export class NewsListComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    // this.totalpages = this.articles.length / 5;
-    this.changePage();
   }
 
   hasMessages() {
@@ -40,6 +38,7 @@ export class NewsListComponent implements OnInit {
       this.route.data.subscribe(data => {
         this.loadArticles(data['articles']);
         this.loadLinks(data['links']);
+        this.changePage();
       });
     }
   }
@@ -68,11 +67,4 @@ export class NewsListComponent implements OnInit {
 
     this.pagedArticles = this.articles.slice(startIndex, endIndex);
   }
-
-  // setPage(page: number) {
-  //   if (page < 1 || page > this.totalpages) {
-  //       return;
-  //   }
-  //   this.pagedArticles = this.articles.slice((page - 1) * 5, page * 5);
-  // }
 }

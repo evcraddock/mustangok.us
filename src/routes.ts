@@ -7,6 +7,6 @@ export const appRoutes: Routes = [
     { path: 'news', component: NewsListComponent, resolve: { links: LinksResolver, articles: ArticlesResolver } },
     { path: ':category', component: NewsListComponent, resolve: { articles: ArticlesResolver, links: LinksResolver } },
     { path: ':category/tags/:tag', component: NewsListComponent, resolve: { articles: ArticlesResolver, links: LinksResolver } },
-    { path: 'articles/:category/:permalink', component: NewsDetailComponent, resolve: { article: ArticleResolver, links: LinksResolver } },
+    { path: 'articles/:permalink', component: NewsDetailComponent, resolve: { article: ArticleResolver, links: LinksResolver } },
     { path: '', redirectTo: 'news', pathMatch: 'full' }
 ];
