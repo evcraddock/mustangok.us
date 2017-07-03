@@ -9,7 +9,7 @@ describe('AppComponent', () => {
   });
 
   it('should create', () => {
-    expect(component.title).toBe('Sample News');
+    expect(component.title).toBe('Mustang News');
     expect(component).toBeTruthy();
   });
 });

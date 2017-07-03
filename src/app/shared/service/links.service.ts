@@ -13,8 +13,26 @@ export class LinksService {
     private serverUrl = environment.apiEndpoint;
     constructor(private http: Http, private router: Router, private errorService: ErrorService) {}
 
-    getLinks(params?: URLSearchParams): Observable<ILink[]> {
+    getLinkByUrl(url: string): Observable<ILink> {
+        const params = new URLSearchParams();
+        params.set('url', url);
+
         const request = this.http.get(this.serverUrl + '/links', { search: params });
+        return request.map((response: Response) => {
+            const links: ILink[] = [];
+            response.json().forEach(element => {
+                links.push(this.convertToLink(element));
+            });
+
+            return links[0];
+        });
+
+       // return null;
+    }
+
+    getLinks(params?: URLSearchParams): Observable<ILink[]> {
+       // const request = this.http.get(this.serverUrl + '/links', { search: params });
+       const request = this.http.get(this.serverUrl + '/links', { search: params });
 
         return request.map((response: Response) => {
             const links: ILink[] = [];

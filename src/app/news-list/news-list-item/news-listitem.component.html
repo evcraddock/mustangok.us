@@ -7,7 +7,7 @@
     <div class="media-body info">
         <h3 class="media-heading"><a [routerLink]= "['/articles', article.url]">{{ article.title }}</a></h3>
         <span *ngFor="let cat of article.categories">
-            <a [routerLink]="['/', cat]"><i class="label label-default">{{ cat }}</i></a>
+            <a [routerLink]="['/news/', cat]"><i class="label label-default">{{ cat }}</i></a>
         </span>
         <br/><br/>
         <span>

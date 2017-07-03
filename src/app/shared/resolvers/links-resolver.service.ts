@@ -8,20 +8,28 @@ import { LinksService } from '../service';
 
 @Injectable()
 export class LinksResolver implements Resolve<any> {
-    constructor(private linkService: LinksService) {}
+    constructor(private linksService: LinksService) {}
 
     resolve(route: ActivatedRouteSnapshot) {
+        const links = this.linksService.getLinkByUrl(window.location.pathname);
 
-        const params = new URLSearchParams();
-        if (route.params['category']) {
-            params.set('categories', route.params['category']);
-        }
+        return links.flatMap(l => {
+            const params = new URLSearchParams();
 
-        if (route.params['tag']) {
-            params.set('tags', route.params['tag']);
-        }
+            if (l && l.categories) {
+                for (const cat of l.categories) {
+                    params.append('categories', cat);
+                }
+            }
 
-        return this.linkService.getLinks(params)
+            if (l && l.tags) {
+                for (const tag of l.tags) {
+                    params.append('tags', tag);
+                }
+            }
+
+            return this.linksService.getLinks(params);
+        })
         .catch(error => {
             // Could handle the error here?
             return Observable.of(error);

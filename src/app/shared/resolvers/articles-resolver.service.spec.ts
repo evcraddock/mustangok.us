@@ -4,13 +4,14 @@ import { Http, Response, URLSearchParams, ResponseOptions } from '@angular/http'
 import { Observable } from 'rxjs/Rx';
 
 import { ArticlesResolver } from './articles-resolver.service';
-import { ArticleService, ErrorService } from '../service/index';
+import { ArticleService, ErrorService, LinksService } from '../service/index';
 
 describe('ArticlesResolver', () => {
     let mockHttp;
     let mockRouter;
     let service: ArticlesResolver;
     let mockArticleService: ArticleService;
+    let mockLinkService: LinksService;
     let mockErrorService: ErrorService;
 
     beforeEach(() => {
@@ -18,7 +19,8 @@ describe('ArticlesResolver', () => {
         mockRouter = jasmine.createSpyObj('route', ['stuff']);
         mockErrorService = new ErrorService();
         mockArticleService = new ArticleService(mockHttp, mockRouter, mockErrorService);
-        service = new ArticlesResolver(mockArticleService);
+        mockLinkService = new LinksService(mockHttp, mockRouter, mockErrorService);
+        service = new ArticlesResolver(mockArticleService, mockLinkService);
     });
 
     it('should create', () => {

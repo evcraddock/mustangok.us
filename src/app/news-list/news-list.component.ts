@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 import { IArticle, ILink } from '../shared/models/index';
 
@@ -14,11 +14,15 @@ export class NewsListComponent implements OnInit {
   public messages: string[] = [];
   public pagesize = 5;
   public page = 1;
+  private linkPath = '';
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadData();
+    // const snapshot = this.route.snapshot;
+    // this.linkPath = snapshot.url[0].path;
+    this.linkPath = window.location.pathname;
   }
 
   hasMessages() {
@@ -34,6 +38,10 @@ export class NewsListComponent implements OnInit {
   }
 
   loadData() {
+    // this.route.params.subscribe(param => {
+    //   this.category = param['category'];
+    // });
+
     if (this.route.data) {
       this.route.data.subscribe(data => {
         this.loadArticles(data['articles']);
